@@ -16,7 +16,7 @@ import ResetPasswordPage from './pages/auth/ResetPasswordPage';
 import NotFound from "./pages/NotFound";
 
 import ProtectedRoute from './ProtectedRoute';
-import AdminProtectedRoute from './routes/AdminProtectedRoute'; // ✅ NEW
+import AdminProtectedRoute from './AdminProtectedRoute'; // ✅ NEW
 
 import 'react-toastify/dist/ReactToastify.css';
 
