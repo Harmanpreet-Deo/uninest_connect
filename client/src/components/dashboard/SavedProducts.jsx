@@ -136,16 +136,16 @@ const SavedProducts = () => {
                                         <Card.Body className="p-2">
                                             <strong className="d-block text-truncate mb-1">{product.title}</strong>
 
-                                            <div className="d-flex flex-wrap gap-1 mb-1">
+                                            {/* ✅ Add this badge section */}
+                                            <div className="d-flex flex-wrap gap-1 mb-2">
                                                 <Badge bg={product.condition === 'new' ? 'success' : 'warning'}>{product.condition}</Badge>
                                                 <Badge bg="secondary">{product.category}</Badge>
                                                 <Badge bg="dark">${product.price}</Badge>
                                             </div>
 
-                                            <small className="text-black d-block mb-1">
-                                                Seller: <a href={`/roommates/profile/${product.user?._id}`} className="text-decoration-none">
-                                                    {product.user?.fullName}
-                                                </a> {product.user?.isVerified && <Badge bg="success">Verified</Badge>}
+                                            <small className="text-black d-block mb-2">
+                                                Seller: <a href={`/roommates/profile/${product.user?._id}`} className="text-decoration-none">{product.user?.fullName}</a>
+                                                {product.user?.isVerified && <Badge bg="success" className="ms-2">Verified</Badge>}
                                             </small>
 
                                             <Button
@@ -160,6 +160,7 @@ const SavedProducts = () => {
                                                 Unsave
                                             </Button>
                                         </Card.Body>
+
                                     </Card>
                                 </Col>
                             ))
