@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'https://uninest-backend.onrender.com/api', // ⬅️ your real backend URL here
+    baseURL: 'https://uninest-connect.onrender.com/api',
     withCredentials: true
 });
 
