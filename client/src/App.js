@@ -20,6 +20,9 @@ import ProtectedRoute from './ProtectedRoute'; // 👈 import the wrapper
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
+
+    const user = JSON.parse(localStorage.getItem('user') || '{"isProfileComplete": false}');
+
     return (
         <Router>
             <ToastContainer position="top-center" autoClose={2000} />

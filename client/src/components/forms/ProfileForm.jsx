@@ -52,29 +52,26 @@ const ProfileForm = () => {
         try {
             await createUserProfile(formData, token);
         
-            // ✅ Mark profile as complete in the backend
             await markProfileComplete();
         
-            // ✅ Update localStorage
+            // 🔄 Immediately update localStorage
             const storedUser = localStorage.getItem('user');
             if (storedUser) {
-                const user = JSON.parse(storedUser);
-                user.isProfileComplete = true;
-                localStorage.setItem('user', JSON.stringify(user));
+                const updated = { ...JSON.parse(storedUser), isProfileComplete: true };
+                localStorage.setItem('user', JSON.stringify(updated));
             }
         
             toast.success('Profile created successfully!');
-            
-            // ✅ Force reload to reflect latest localStorage
+        
+            // 🔄 Use window.location.reload to re-evaluate route
             setTimeout(() => {
                 window.location.href = '/dashboard';
-            }, 1500);
+            }, 1200);
         
         } catch (err) {
             console.error('Profile creation failed:', err);
             toast.error('Profile creation failed. Please try again.');
         }
-        
         
     };
 
