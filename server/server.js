@@ -20,20 +20,23 @@ connectDB();
 
 const allowedOrigins = [
     'https://uninest-connect.vercel.app',
-    'https://uninest-connect-l3yjp51pp-harmanpreet-deos-projects.vercel.app'
+    /\.vercel\.app$/ // ✅ allow all vercel preview deploys
   ];
   
   app.use(cors({
     origin: (origin, callback) => {
       console.log('🔍 Origin received:', origin);
-      if (!origin || allowedOrigins.includes(origin)) {
+      if (!origin || allowedOrigins.some(entry =>
+        typeof entry === 'string' ? origin === entry : entry.test(origin)
+      )) {
         callback(null, true);
       } else {
-        callback(new Error('Not allowed by CORS'));
+        callback(new Error(`❌ Not allowed by CORS: ${origin}`));
       }
     },
     credentials: true
   }));
+  
   
   
 
