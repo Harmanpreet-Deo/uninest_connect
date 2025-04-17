@@ -20,7 +20,7 @@ connectDB();
 
 const allowedOrigins = [
     'https://uninest-connect.vercel.app',
-    /\.vercel\.app$/ // ✅ allow all vercel deploy URLs
+    'https://uninest-connect-l3yjp51pp-harmanpreet-deos-projects.vercel.app'
   ];
   
   app.use(cors({
