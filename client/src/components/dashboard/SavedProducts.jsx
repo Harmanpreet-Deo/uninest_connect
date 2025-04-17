@@ -133,7 +133,7 @@ const SavedProducts = () => {
                                         />
                                         <Card.Body className="p-2">
                                             <strong className="d-block text-truncate mb-1">{product.title}</strong>
-                                            <small className="text-white d-block mb-1">Seller: <a href={`/roommates/profile/${product.user?._id}`} className="text-decoration-none">{product.user?.fullName}</a> {product.user?.isVerified && <Badge bg="success">Verified</Badge>}</small>
+                                            <small className="text-black d-block mb-1">Seller: <a href={`/roommates/profile/${product.user?._id}`} className="text-decoration-none">{product.user?.fullName}</a> {product.user?.isVerified && <Badge bg="success">Verified</Badge>}</small>
                                             <Button
                                                 variant="outline-danger"
                                                 size="sm"
