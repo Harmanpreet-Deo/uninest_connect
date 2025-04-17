@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiAdmin = axios.create({
-    baseURL: 'https://uninest-connect.onrender.com/apiadmin', // ⬅️ same here
+    baseURL: 'https://uninest-connect.onrender.com/api/admin', // ⬅️ same here
 });
 
 apiAdmin.interceptors.request.use((config) => {
