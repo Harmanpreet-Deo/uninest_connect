@@ -2,9 +2,9 @@ import Admin from '../models/Admin.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import Request from '../models/Request.js';
-import User from '../models/user.js';
-import Product from '../models/product.js';
-import Listing from '../models/listing.js';
+import User from '../models/User.js';
+import Product from '../models/Product.js';
+import Listing from '../models/Listing.js';
 
 // ✅ Admin Login
 export const adminLogin = async (req, res) => {
