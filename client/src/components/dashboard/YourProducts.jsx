@@ -143,37 +143,36 @@ const YourProducts = () => {
                 <p className="text-white mb-0">Manage or list items you want to sell</p>
             </div>
 
-            {!showForm && (
+            {!showForm && products.length > 0 && (
                 <div className="w-100 mb-4 d-flex align-items-start justify-content-between flex-row" style={{ maxWidth: '1200px', flexWrap: 'wrap', gap: '10px' }}>
-                    {products.length > 0 && (
-                        <div style={{ all: 'unset', display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-                            <ProductFilterBar
-                                searchTerm={searchTerm}
-                                setSearchTerm={setSearchTerm}
-                                sortOrder={sortOrder}
-                                setSortOrder={setSortOrder}
-                                conditionFilter={conditionFilter}
-                                setConditionFilter={setConditionFilter}
-                                categoryFilter={categoryFilter}
-                                setCategoryFilter={setCategoryFilter}
-                                priceSort={priceSort}
-                                setPriceSort={setPriceSort}
-                                categories={categories}
-                                onReset={() => {
-                                    setSortOrder('newest');
-                                    setConditionFilter('');
-                                    setCategoryFilter('');
-                                    setSearchTerm('');
-                                    setPriceSort('');
-                                }}
-                            />
-                        </div>
-                    )}
+                    <div style={{ all: 'unset', display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                        <ProductFilterBar
+                            searchTerm={searchTerm}
+                            setSearchTerm={setSearchTerm}
+                            sortOrder={sortOrder}
+                            setSortOrder={setSortOrder}
+                            conditionFilter={conditionFilter}
+                            setConditionFilter={setConditionFilter}
+                            categoryFilter={categoryFilter}
+                            setCategoryFilter={setCategoryFilter}
+                            priceSort={priceSort}
+                            setPriceSort={setPriceSort}
+                            categories={categories}
+                            onReset={() => {
+                                setSortOrder('newest');
+                                setConditionFilter('');
+                                setCategoryFilter('');
+                                setSearchTerm('');
+                                setPriceSort('');
+                            }}
+                        />
+                    </div>
                     <Button variant="primary" size="sm" onClick={handleCreate}>
                         <PlusCircle className="me-2" /> Add Product
                     </Button>
                 </div>
             )}
+
 
             {showForm ? (
                 <ProductForm
