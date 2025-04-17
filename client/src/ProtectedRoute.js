@@ -1,13 +1,18 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 
 const ProtectedRoute = ({ children }) => {
     const token = localStorage.getItem('token');
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const location = useLocation();
 
+    // Not logged in
     if (!token) return <Navigate to="/auth" replace />;
 
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
-    if (!user.isProfileComplete) return <Navigate to="/profile/create" replace />;
+    // Trying to access anything other than profile creation but profile is incomplete
+    if (!user.isProfileComplete && location.pathname !== '/profile/create') {
+        return <Navigate to="/profile/create" replace />;
+    }
 
     return children;
 };
