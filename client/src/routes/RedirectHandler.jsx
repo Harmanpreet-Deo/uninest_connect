@@ -10,7 +10,7 @@ export default function RedirectHandler() {
 
         if (!token) return navigate('/auth');
 
-        axios.get('http://localhost:5000/api/auth/me', {
+        axios.get('https://uninest-connect.onrender.com/api/auth/me', {
             headers: { Authorization: `Bearer ${token}` }
         }).then(res => {
             const user = res.data;

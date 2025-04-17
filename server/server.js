@@ -21,11 +21,12 @@ connectDB();
 const allowedOrigins = [
     'https://uninest-connect.vercel.app',
     'https://uninest-connect-git-main-harmanpreet-deos-projects.vercel.app',
-    'https://uninest-connect-dxkw3qgxu-harmanpreet-deos-projects.vercel.app'
+    'uninest-connect-dxkw3qqxu-harmanpreet-deos-projects.vercel.app'
   ];
   
   app.use(cors({
     origin: (origin, callback) => {
+      console.log('🔍 Origin received:', origin);
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
@@ -34,6 +35,7 @@ const allowedOrigins = [
     },
     credentials: true
   }));
+  
   
 
 app.use(express.json());
