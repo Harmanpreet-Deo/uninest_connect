@@ -1,0 +1,12 @@
+.admin-dashboard {
+    display: flex;
+    min-height: 100vh;
+
+}
+
+.admin-main {
+    flex: 1;
+    background-color: #212121;
+    padding: 24px;
+    overflow-y: auto;
+}

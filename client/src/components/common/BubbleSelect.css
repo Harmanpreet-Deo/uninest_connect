@@ -1,0 +1,27 @@
+.bubble-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+}
+
+.bubble {
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    background-color: #f5f5f5;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.bubble:hover {
+    background-color: #e6e6e6;
+}
+
+.bubble.selected {
+    background-color: #2c2f33 !important;
+    color: white !important;
+    border-color: #2c2f33 !important;
+}

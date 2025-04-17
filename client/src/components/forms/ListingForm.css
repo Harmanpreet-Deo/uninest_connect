@@ -1,0 +1,84 @@
+/* Utility bubbles section */
+.utility-bubbles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+/* Each utility bubble */
+.bubble {
+    padding: 8px 16px;
+    border-radius: 20px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    color: #333;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s ease;
+    font-size: 14px;
+}
+
+/* Hover effect */
+.bubble:hover {
+    background-color: #e0f7ea;
+    border-color: #8ae1b0;
+}
+
+/* Selected bubble */
+.bubble.selected {
+    background-color: #28a745;
+    color: white;
+    border-color: #28a745;
+}
+
+/* Image preview container */
+.image-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+/* Individual image with remove button */
+.image-preview .position-relative {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+/* Preview image */
+.image-preview img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+/* Remove (×) button */
+.image-preview button {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #dc3545;
+    border: none;
+    color: white;
+    border-radius: 50%;
+    font-size: 12px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    cursor: pointer;
+}
+
+/* Responsive tweak (optional) */
+@media (max-width: 576px) {
+    .bubble {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+}

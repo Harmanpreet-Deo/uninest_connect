@@ -1,0 +1,25 @@
+.sidebar {
+    color: #ffffff;
+    font-weight: 500;
+    background-color: #121212;
+    position: sticky;
+    top: 0;
+}
+
+.sidebar .nav-link {
+    color: #ffffff !important;
+    border-radius: 6px;
+    margin-bottom: 4px;
+    transition: all 0.2s ease-in-out;
+    background-color: transparent !important;
+}
+
+.sidebar .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #ffffff !important;
+}
+
+.sidebar .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    color: #ffffff !important;
+}

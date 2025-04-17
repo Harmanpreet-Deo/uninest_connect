@@ -1,0 +1,75 @@
+.profile-summary-form {
+    width: 100%;
+    max-width: 1200px; /* You can adjust this value for wider layout */
+    background-color: #fff;
+    border-radius: 16px;
+}
+
+.edit-icon {
+    color: #444;
+    transition: 0.2s;
+}
+.edit-icon:hover {
+    color: #000;
+}
+
+/* Custom Toggle Switch */
+.custom-toggle-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    background-color: #c1c1c1;
+    border-radius: 34px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #00bcd4;
+}
+
+input:not(:checked) + .slider {
+    background-color: #999;
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+/* Responsive full-width centering */
+.profile-summary-form {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2rem;
+}
