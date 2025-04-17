@@ -116,7 +116,7 @@ const SavedProducts = () => {
                         </Button>
                     </div>
 
-                    <Row xs={1} sm={2} className="g-3 mt-3" style={{maxHeight: '75vh', overflowY: 'scroll' }}>
+                    <Row xs={1} sm={2} className="g-3 mt-3" style={{ maxHeight: '75vh', overflowY: 'scroll' }}>
                         {filteredProducts.length > 0 ? (
                             filteredProducts.map(product => (
                                 <Col key={product._id}>
@@ -128,12 +128,26 @@ const SavedProducts = () => {
                                         <Card.Img
                                             variant="top"
                                             src={product.images[0] || '/placeholder.jpg'}
-                                            style={{ height: '140px',          objectFit: 'contain',               // changed from 'cover'
-                                                backgroundColor: '#f8f9fa'  }}
+                                            style={{
+                                                height: '140px', objectFit: 'contain',               // changed from 'cover'
+                                                backgroundColor: '#f8f9fa'
+                                            }}
                                         />
                                         <Card.Body className="p-2">
                                             <strong className="d-block text-truncate mb-1">{product.title}</strong>
-                                            <small className="text-black d-block mb-1">Seller: <a href={`/roommates/profile/${product.user?._id}`} className="text-decoration-none">{product.user?.fullName}</a> {product.user?.isVerified && <Badge bg="success">Verified</Badge>}</small>
+
+                                            <div className="d-flex flex-wrap gap-1 mb-1">
+                                                <Badge bg={product.condition === 'new' ? 'success' : 'warning'}>{product.condition}</Badge>
+                                                <Badge bg="secondary">{product.category}</Badge>
+                                                <Badge bg="dark">${product.price}</Badge>
+                                            </div>
+
+                                            <small className="text-black d-block mb-1">
+                                                Seller: <a href={`/roommates/profile/${product.user?._id}`} className="text-decoration-none">
+                                                    {product.user?.fullName}
+                                                </a> {product.user?.isVerified && <Badge bg="success">Verified</Badge>}
+                                            </small>
+
                                             <Button
                                                 variant="outline-danger"
                                                 size="sm"
