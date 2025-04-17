@@ -19,7 +19,6 @@ const app = express();
 connectDB();
 
 const allowedOrigins = [
-    'http://localhost:3000',
     'https://uninest-connect.vercel.app',
     'https://uninest-connect-git-main-harmanpreet-deos-projects.vercel.app',
     'https://uninest-connect-dxkw3qgxu-harmanpreet-deos-projects.vercel.app'
