@@ -50,8 +50,18 @@ const ProfileForm = () => {
 
         try {
             await createUserProfile(formData, token);
+
+            // ✅ Mark profile complete in backend
+            await markProfileComplete();
+            
+            // ✅ Update localStorage to reflect it
+            const user = JSON.parse(localStorage.getItem('user'));
+            user.isProfileComplete = true;
+            localStorage.setItem('user', JSON.stringify(user));
+            
             toast.success('Profile created successfully!');
             setTimeout(() => navigate('/dashboard'), 2000);
+            
         } catch (err) {
             console.error('Profile creation failed:', err);
             toast.error('Profile creation failed. Please try again.');
