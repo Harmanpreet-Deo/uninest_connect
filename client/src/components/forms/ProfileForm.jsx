@@ -55,7 +55,7 @@ const ProfileForm = () => {
             // ✅ Mark profile as complete in the backend
             await markProfileComplete();
         
-            // ✅ Optionally update localStorage if user is already stored
+            // ✅ Update localStorage
             const storedUser = localStorage.getItem('user');
             if (storedUser) {
                 const user = JSON.parse(storedUser);
@@ -64,11 +64,17 @@ const ProfileForm = () => {
             }
         
             toast.success('Profile created successfully!');
-            setTimeout(() => navigate('/dashboard'), 2000);
+            
+            // ✅ Force reload to reflect latest localStorage
+            setTimeout(() => {
+                window.location.href = '/dashboard';
+            }, 1500);
+        
         } catch (err) {
             console.error('Profile creation failed:', err);
             toast.error('Profile creation failed. Please try again.');
         }
+        
         
     };
 
