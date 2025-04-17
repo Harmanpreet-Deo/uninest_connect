@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { Form, Button, Tabs, Tab, Row, Col } from 'react-bootstrap';
-import { createUserProfile } from '../../services/userService';
+import { createUserProfile, markProfileComplete } from '../../services/userService';
 import { useNavigate } from 'react-router-dom';
 import './ProfileForm.css';
 
