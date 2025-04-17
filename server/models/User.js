@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true, match: /@(?:student\.)?kpu\.ca$/},
-    fullName: { type: String, required: true },
+    fullName: { type: String },
     password: { type: String },
     otp: { type: String },
     otpExpiry: { type: Date },
