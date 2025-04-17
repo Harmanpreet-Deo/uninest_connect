@@ -9,7 +9,7 @@ const AdminRequests = () => {
     const [filterType, setFilterType] = useState('');
     const [filterStatus, setFilterStatus] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 6;
+    const itemsPerPage = 3;
 
     useEffect(() => {
         const fetchRequests = async () => {
