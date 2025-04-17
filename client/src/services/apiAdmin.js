@@ -1,7 +1,9 @@
+// services/apiAdmin.js
 import axios from 'axios';
 
 const apiAdmin = axios.create({
-    baseURL: 'https://uninest-connect.onrender.com/api/admin', // ⬅️ same here
+    baseURL: 'https://uninest-connect.onrender.com/api/admin',
+    withCredentials: true,
 });
 
 apiAdmin.interceptors.request.use((config) => {

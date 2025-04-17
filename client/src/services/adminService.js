@@ -4,48 +4,41 @@ import apiAdmin from "./apiAdmin";
 // ✅ Admin Login
 export const adminLogin = async (credentials) => {
     const { data } = await apiAdmin.post('/login', credentials);
+    localStorage.setItem('adminToken', data.token); // <-- Don't forget this here!
     return data;
 };
 
 // ✅ Get all admin requests
 export const getAllAdminRequests = async () => {
-    const token = localStorage.getItem('adminToken');
-    const { data } = await apiAdmin.get('/requests', {
-        headers: { Authorization: `Bearer ${token}` }
-    });
+    const { data } = await apiAdmin.get('/requests');
     return data;
 };
 
 // ✅ Update request status
 export const updateRequestStatus = async (requestId, status) => {
-    const token = localStorage.getItem('adminToken');
-    const { data } = await apiAdmin.patch(`/requests/${requestId}/status`, { status }, {
-        headers: { Authorization: `Bearer ${token}` }
-    });
+    const { data } = await apiAdmin.patch(`/requests/${requestId}/status`, { status });
     return data;
 };
 
 // ✅ Delete entity by admin
 export const deleteEntityByAdmin = async (type, id) => {
-    const token = localStorage.getItem('adminToken');
-    const { data } = await apiAdmin.delete(`/delete/${type}/${id}`, {
-        headers: { Authorization: `Bearer ${token}` }
-    });
+    const { data } = await apiAdmin.delete(`/delete/${type}/${id}`);
     return data;
 };
 
+// ✅ Logout
 export const adminLogout = async () => {
-    const token = localStorage.getItem('adminToken');
-    await apiAdmin.post('/logout', {}, {
-        headers: { Authorization: `Bearer ${token}` }
-    });
-
-    // ✅ Clear token locally
-    localStorage.removeItem('adminToken');
-    window.location.href = '/admin/login'; // or navigate programmatically
+    try {
+        await apiAdmin.post('/logout');
+    } catch (err) {
+        console.warn('Logout failed (but proceeding):', err.message);
+    } finally {
+        localStorage.removeItem('adminToken');
+        window.location.href = '/admin/login';
+    }
 };
 
-
+// ✅ Fetch individual entities
 export const getUserByIdAdmin = async (id) => {
     const { data } = await apiAdmin.get(`/user/${id}`);
     return data;
