@@ -1,7 +1,7 @@
 import cloudinary from '../config/cloudinaryConfig.js';
 import User from '../models/User.js';
 import bcrypt from 'bcryptjs';
-import Request from '../models/request.js';
+import Request from '../models/Request.js';
 
 import path from 'path';
 
