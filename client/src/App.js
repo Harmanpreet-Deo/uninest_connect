@@ -15,14 +15,12 @@ import AdminUserProfile from "./pages/admin/AdminUserProfile";
 import ResetPasswordPage from './pages/auth/ResetPasswordPage';
 import NotFound from "./pages/NotFound";
 
-import ProtectedRoute from './ProtectedRoute'; // 👈 import the wrapper
+import ProtectedRoute from './ProtectedRoute';
+import AdminProtectedRoute from './routes/AdminProtectedRoute'; // ✅ NEW
 
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-
-    const user = JSON.parse(localStorage.getItem('user') || '{"isProfileComplete": false}');
-
     return (
         <Router>
             <ToastContainer position="top-center" autoClose={2000} />
@@ -61,17 +59,46 @@ function App() {
                 {/* Admin login (public) */}
                 <Route path="/admin/login" element={<AdminLogin />} />
 
-                {/* Admin routes (require admin auth separately inside AdminDashboard) */}
-                <Route path="/admin" element={<AdminDashboard />}>
+                {/* Admin routes (require adminToken) */}
+                <Route
+                    path="/admin"
+                    element={
+                        <AdminProtectedRoute>
+                            <AdminDashboard />
+                        </AdminProtectedRoute>
+                    }
+                >
                     <Route index element={<AdminRequests />} />
                     <Route path="requests" element={<AdminRequests />} />
                 </Route>
 
-                {/* Not nested inside AdminDashboard */}
-                <Route path="/admin/user/:id" element={<AdminUserProfile />} />
-                <Route path="/admin/product/:id" element={<AdminUserProduct />} />
-                <Route path="/admin/listing/:id" element={<AdminUserListing />} />
+                {/* Admin detail pages */}
+                <Route
+                    path="/admin/user/:id"
+                    element={
+                        <AdminProtectedRoute>
+                            <AdminUserProfile />
+                        </AdminProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/admin/product/:id"
+                    element={
+                        <AdminProtectedRoute>
+                            <AdminUserProduct />
+                        </AdminProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/admin/listing/:id"
+                    element={
+                        <AdminProtectedRoute>
+                            <AdminUserListing />
+                        </AdminProtectedRoute>
+                    }
+                />
 
+                {/* Not Found */}
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </Router>
