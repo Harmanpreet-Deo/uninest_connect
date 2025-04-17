@@ -24,18 +24,10 @@ const allowedOrigins = [
   ];
   
   app.use(cors({
-    origin: (origin, callback) => {
-      console.log('🔍 Origin received:', origin);
-      if (!origin || allowedOrigins.some(entry =>
-        typeof entry === 'string' ? origin === entry : entry.test(origin)
-      )) {
-        callback(null, true);
-      } else {
-        callback(new Error(`❌ Not allowed by CORS: ${origin}`));
-      }
-    },
+    origin: true, // ⬅️ Reflects the request origin automatically
     credentials: true
   }));
+  
   
   
   
