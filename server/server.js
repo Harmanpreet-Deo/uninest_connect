@@ -18,11 +18,25 @@ const app = express();
 // Connect to MongoDB
 connectDB();
 
-// Middleware
-app.use(cors({
-    origin: 'http://localhost:3000',
+const allowedOrigins = [
+    'http://localhost:3000',
+    'https://uninest-connect.vercel.app',
+    'https://uninest-connect-git-main-harmanpreet-deos-projects.vercel.app',
+    'https://uninest-connect-dxkw3qgxu-harmanpreet-deos-projects.vercel.app'
+  ];
+  
+  app.use(cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     credentials: true
-}));
+  }));
+  
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // ✅ THIS IS REQUIRED
 
