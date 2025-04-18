@@ -12,6 +12,7 @@ import ReportModal from "../layout/ReportModal";
 const BrowseListings = () => {
     const [listings, setListings] = useState([]);
     const [showReport, setShowReport] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const [filteredListings, setFilteredListings] = useState([]);
     const [selectedListing, setSelectedListing] = useState(null);
@@ -36,8 +37,10 @@ const BrowseListings = () => {
         }
 
         const fetchListings = async () => {
+            setLoading(true);
             const all = await getAllListings();
             setListings(all);
+            setLoading(false);
         };
 
         fetchListings();
@@ -117,7 +120,13 @@ const BrowseListings = () => {
 
             <Row>
                 <Col lg={7}>
-                    {paginated.length === 0 ? (
+                    {loading ? (
+                        <div className="text-center py-5 text-white">
+                            <div className="spinner-border text-light" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    ) : paginated.length === 0 ? (
                         <div className="text-center text-white py-5">
                             <h5>No listings found.</h5>
                         </div>
@@ -150,13 +159,13 @@ const BrowseListings = () => {
                                                     {currentUser?.savedListings?.includes(listing._id) ? 'Unsave' : 'Save'}
                                                 </Button>
                                             )}
-
                                         </Card.Body>
                                     </Card>
                                 </Col>
                             ))}
                         </Row>
                     )}
+
 
                     {totalPages > 1 && (
                         <div className="d-flex justify-content-center align-items-center gap-3 mt-4">
