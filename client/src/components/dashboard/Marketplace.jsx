@@ -9,6 +9,7 @@ import ReportModal from "../layout/ReportModal";
 
 const Marketplace = () => {
     const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [savedProducts, setSavedProducts] = useState([]);
     const [showReport, setShowReport] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
@@ -30,10 +31,12 @@ const Marketplace = () => {
         }
 
         const fetchData = async () => {
+            setLoading(true);
             const all = await getAllProducts();
             const saved = await getSavedProducts();
             setProducts(all.filter(p => !p.isSold));
             setSavedProducts(saved);
+            setLoading(false);
         };
 
         fetchData();
@@ -92,60 +95,67 @@ const Marketplace = () => {
 
 
 
-                    {paginated.length === 0 ? (
+                    {loading ? (
+                        <div className="text-center py-5 text-white">
+                            <div className="spinner-border text-light" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    ) : paginated.length === 0 ? (
                         <div className="text-center text-white py-5">
                             <h5>No products found.</h5>
                             <p>Try adjusting your filters or search terms.</p>
                         </div>
                     ) : (
-                        <Row xs={1} md={2} className="g-4">
-                        {paginated.map(product => (
-                            <Col key={product._id}>
-                                <Card className="h-100 p-2 shadow-sm">
-                                    {product.images?.[0] && (
-                                        <Card.Img
-                                            variant="top"
-                                            src={product.images[0]}
-                                            style={{
-                                                height: '180px',
-                                                objectFit: 'contain',               // changed from 'cover'
-                                                backgroundColor: '#f8f9fa'          // light background to fill space around image
-                                            }}
-                                        />
 
-                                    )}
-                                    <Card.Body>
-                                        <Card.Title>{product.title}</Card.Title>
-                                        <div className="d-flex flex-wrap gap-2 mb-2">
-                                            <Badge bg={product.condition === 'new' ? 'success' : 'warning'}>
-                                                {product.condition}
-                                            </Badge>
-                                            <Badge bg="secondary">{product.category}</Badge>
-                                            <Badge bg="dark">${product.price}</Badge>
-                                        </div>
-                                        <p className="text-muted mb-1">Seller: {product.user?.fullName} {product.user?.isVerified && <Badge bg="success">Verified</Badge>}</p>
-                                        {currentUser?.id !== product.user._id && (
-                                            <Button
-                                                variant={savedProducts.some(p => p._id === product._id) ? 'outline-danger' : 'outline-success'}
-                                                size="sm"
-                                                className="me-2"
-                                                onClick={() => handleToggleSave(product._id)}
-                                            >
-                                                {savedProducts.some(p => p._id === product._id) ? 'Unsave' : 'Save'}
-                                            </Button>
+                        <Row xs={1} md={2} className="g-4">
+                            {paginated.map(product => (
+                                <Col key={product._id}>
+                                    <Card className="h-100 p-2 shadow-sm">
+                                        {product.images?.[0] && (
+                                            <Card.Img
+                                                variant="top"
+                                                src={product.images[0]}
+                                                style={{
+                                                    height: '180px',
+                                                    objectFit: 'contain',               // changed from 'cover'
+                                                    backgroundColor: '#f8f9fa'          // light background to fill space around image
+                                                }}
+                                            />
+
                                         )}
-                                        <Button
-                                            variant="outline-primary"
-                                            size="sm"
-                                            onClick={() => setSelectedProduct(product)}
-                                        >
-                                            View
-                                        </Button>
-                                    </Card.Body>
-                                </Card>
-                            </Col>
-                        ))}
-                    </Row>)}
+                                        <Card.Body>
+                                            <Card.Title>{product.title}</Card.Title>
+                                            <div className="d-flex flex-wrap gap-2 mb-2">
+                                                <Badge bg={product.condition === 'new' ? 'success' : 'warning'}>
+                                                    {product.condition}
+                                                </Badge>
+                                                <Badge bg="secondary">{product.category}</Badge>
+                                                <Badge bg="dark">${product.price}</Badge>
+                                            </div>
+                                            <p className="text-muted mb-1">Seller: {product.user?.fullName} {product.user?.isVerified && <Badge bg="success">Verified</Badge>}</p>
+                                            {currentUser?.id !== product.user._id && (
+                                                <Button
+                                                    variant={savedProducts.some(p => p._id === product._id) ? 'outline-danger' : 'outline-success'}
+                                                    size="sm"
+                                                    className="me-2"
+                                                    onClick={() => handleToggleSave(product._id)}
+                                                >
+                                                    {savedProducts.some(p => p._id === product._id) ? 'Unsave' : 'Save'}
+                                                </Button>
+                                            )}
+                                            <Button
+                                                variant="outline-primary"
+                                                size="sm"
+                                                onClick={() => setSelectedProduct(product)}
+                                            >
+                                                View
+                                            </Button>
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
+                            ))}
+                        </Row>)}
 
                     {totalPages > 1 && (
                         <Pagination className="justify-content-center mt-4">
